@@ -42,62 +42,81 @@ void setup()
 
 void loop() {
 
-  // HARD CODED VALUES TO GET TO YOGURT DISPENSER
-  while (countSteps < 465) {
-    big_steps(-1);
-    Serial.println(countSteps);
-    countSteps++;
+  byte incoming_byte;
+  if (Serial.available() > 0)
+  {
+    incoming_byte = Serial.read();
+    Serial.println(incoming_byte);
   }
-  countSteps = 0;
-  digitalWrite(step_pin, LOW);
 
-  delay(3000);
-  //  // RESET BACK TO TOP
-  //  for (int i = 0; i <= 12000; i++) {
-  //    dir = false;
-  //    small_steps();
-  //    delay(1);
-  //  }
-  //
-  //  // start dispensing yogurt
-  //  for (int i = 0; i <= 10500; i++) { //down for 10,500 steps gets it fully from up to bottom
-  //    dir = true;
-  //    small_steps();
-  //    delay(1);
-  //  }
-  //
-  //  // set all the pins to low so yogurt never moves again
-  //  digitalWrite(Pin0, LOW);
-  //  digitalWrite(Pin1, LOW);
-  //  digitalWrite(Pin2, LOW);
-  //  digitalWrite(Pin3, LOW);
+  if (incoming_byte == '1') {
 
-  // move the platform to the dry dispenser
-  while (countSteps < 700) {
-    big_steps(-1);
-    Serial.println(countSteps);
-    countSteps++;
-  }
-  countSteps = 0;
-  digitalWrite(step_pin, LOW);
+    // HARD CODED VALUES TO GET TO YOGURT DISPENSER
+    while (countSteps < 485) {
+      big_steps(-1);
+      countSteps++;
+    }
+    countSteps = 0;
+    digitalWrite(step_pin, LOW);
 
-  delay(3000);
-  //  // start dispensing dry stuff
-  //  for (int i = 0; i <= 2000; i++) {
-  //    dir = false;
-  //    dry_step();
-  //    delay(2);
-  //  }
-  //  for (int i = 0; i <= 2000; i++) {
-  //    dir = true;
-  //    dry_step();
-  //    delay(2);
-  //  }
+    delay(3000);
+    //  // RESET BACK TO TOP
+    //  for (int i = 0; i <= 12000; i++) {
+    //    dir = false;
+    //    small_steps();
+    //    delay(1);
+    //  }
+    //
+    //  // start dispensing yogurt
+    //  for (int i = 0; i <= 10500; i++) { //down for 10,500 steps gets it fully from up to bottom
+    //    dir = true;
+    //    small_steps();
+    //    delay(1);
+    //  }
+    //
+    //  // set all the pins to low so yogurt never moves again
+    //  digitalWrite(Pin0, LOW);
+    //  digitalWrite(Pin1, LOW);
+    //  digitalWrite(Pin2, LOW);
+    //  digitalWrite(Pin3, LOW);
 
-  // move the platform to the dry dispenser
-  while (countSteps < 450) {
-    big_steps(-1);
-    countSteps++;
+    // move the platform to the dry dispenser
+    while (countSteps < 720) {
+      big_steps(-1);
+      countSteps++;
+    }
+    countSteps = 0;
+    digitalWrite(step_pin, LOW);
+
+    delay(3000);
+    //  // start dispensing dry stuff
+    //  for (int i = 0; i <= 2000; i++) {
+    //    dir = false;
+    //    dry_step();
+    //    delay(2);
+    //  }
+    //  for (int i = 0; i <= 2000; i++) {
+    //    dir = true;
+    //    dry_step();
+    //    delay(2);
+    //  }
+
+    // move the platform to the dry dispenser
+    while (countSteps < 470) {
+      big_steps(-1);
+      countSteps++;
+    }
+    countSteps = 0;
+
+    delay(5000);
+
+    // RESET THE PLATFORM BACK TO BEGINNING
+    while (countSteps < 1630) {
+      big_steps(1);
+      countSteps++;
+    }
+    countSteps = 0;
+
   }
 
 }
