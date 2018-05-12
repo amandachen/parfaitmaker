@@ -8,7 +8,7 @@ const int step_pin = 8;
 const int direction_pin = 9;
 const int STEPS_PER_TURN = 200;
 // for 60 RPM speed
-const int delay_between_step_microsec = 10000; //make it higher to make platform move slower
+const int delay_between_step_microsec = 9000; //make it higher to make platform move slower
 
 // SMALL STEPPER FOR RACK AND PINION (YOGURT):
 int Pin0 = 7;
@@ -43,7 +43,7 @@ void setup()
 void loop() {
 
   // HARD CODED VALUES TO GET TO YOGURT DISPENSER
-  while (countSteps < 500) {
+  while (countSteps < 465) {
     big_steps(-1);
     Serial.println(countSteps);
     countSteps++;
@@ -51,28 +51,29 @@ void loop() {
   countSteps = 0;
   digitalWrite(step_pin, LOW);
 
-  // RESET BACK TO TOP
-  for (int i = 0; i <= 10000; i++) {
-    dir = false;
-    small_steps();
-    delay(1);
-  }
-
-  // start dispensing yogurt
-  for (int i = 0; i <= 10500; i++) { //down for 10,500 steps gets it fully from up to bottom
-    dir = true;
-    small_steps();
-    delay(1);
-  }
-
-  // set all the pins to low so yogurt never moves again
-  digitalWrite(Pin0, LOW);
-  digitalWrite(Pin1, LOW);
-  digitalWrite(Pin2, LOW);
-  digitalWrite(Pin3, LOW);
+  delay(3000);
+  //  // RESET BACK TO TOP
+  //  for (int i = 0; i <= 12000; i++) {
+  //    dir = false;
+  //    small_steps();
+  //    delay(1);
+  //  }
+  //
+  //  // start dispensing yogurt
+  //  for (int i = 0; i <= 10500; i++) { //down for 10,500 steps gets it fully from up to bottom
+  //    dir = true;
+  //    small_steps();
+  //    delay(1);
+  //  }
+  //
+  //  // set all the pins to low so yogurt never moves again
+  //  digitalWrite(Pin0, LOW);
+  //  digitalWrite(Pin1, LOW);
+  //  digitalWrite(Pin2, LOW);
+  //  digitalWrite(Pin3, LOW);
 
   // move the platform to the dry dispenser
-  while (countSteps < 200) {
+  while (countSteps < 700) {
     big_steps(-1);
     Serial.println(countSteps);
     countSteps++;
@@ -80,30 +81,24 @@ void loop() {
   countSteps = 0;
   digitalWrite(step_pin, LOW);
 
-  // start dispensing dry stuff
-  for (int i = 0; i <= 2000; i++) {
-    dir = false;
-    dry_step();
-    delay(2);
-  }
-  for (int i = 0; i <= 2000; i++) {
-    dir = true;
-    dry_step();
-    delay(2);
-  }
-
-  // set all the pins to low so dry pins never moves again
-  digitalWrite(Pin4, LOW);
-  digitalWrite(Pin5, LOW);
-  digitalWrite(Pin6, LOW);
-  digitalWrite(Pin7, LOW);
+  delay(3000);
+  //  // start dispensing dry stuff
+  //  for (int i = 0; i <= 2000; i++) {
+  //    dir = false;
+  //    dry_step();
+  //    delay(2);
+  //  }
+  //  for (int i = 0; i <= 2000; i++) {
+  //    dir = true;
+  //    dry_step();
+  //    delay(2);
+  //  }
 
   // move the platform to the dry dispenser
-  while (countSteps < 500) {
+  while (countSteps < 450) {
     big_steps(-1);
     countSteps++;
   }
-  digitalWrite(step_pin, LOW);
 
 }
 
